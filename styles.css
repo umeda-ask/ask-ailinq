@@ -626,6 +626,9 @@
     font-size: 1.2rem;
     color: #555;
     margin-bottom: 2%;
+    white-space: normal; /* 折り返しを許可 */
+    word-wrap: break-word; /* 長い単語も折り返し */
+    overflow-wrap: break-word; /* 長い単語を途中で改行 */
 }
 
 /* 距離のスタイル */
