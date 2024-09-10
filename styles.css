@@ -171,6 +171,7 @@
   box-sizing: border-box; /* 余白を含めたボックスモデル */
   resize: none; /* サイズ変更を無効化 */
   -webkit-appearance: none; /* Webkitブラウザの矢印を非表示 */
+  z-index: 999999; /* 開くアイコンよりも前に表示 */
 }
 
 /* 送信ボタンのスタイル */
@@ -185,6 +186,7 @@
   transition: background-color 0.3s ease; /* 背景色変更時のアニメーション */
   width: 20%;
   margin: 0% 0% 0% 2%;
+  z-index: 999999; /* 開くアイコンよりも前に表示 */
 }
 
 /* ボタンのホバー効果 */
