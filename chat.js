@@ -250,13 +250,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = 'https://sharing.kigyou-askpro.com/newailinq/styles.css';
+    link.href = 'https://umeda-ask.github.io/ask-ailinq/styles.css';
     document.head.appendChild(link);
 
     let chatbotHTML = `
         <div id="chatbot">
             <div id="chatbotHeader">
-                <img src="https://sharing.kigyou-askpro.com/newailinq/person_icon.png" alt="Person Icon" id="personIcon">
+                <img src="https://umeda-ask.github.io/ask-ailinq/person_icon.png" alt="Person Icon" id="personIcon">
                 <span>お問い合わせチャット</span>
                 <span id="closeChatbot" style="cursor: pointer;">✖</span>
             </div>
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             </div>
         </div>
         <button id="openChatbot">
-            <img src="https://sharing.kigyou-askpro.com/newailinq/chat_open.png" alt="チャットアイコン">
+            <img src="https://umeda-ask.github.io/ask-ailinq/chat_open.png" alt="チャットアイコン">
             <span id="openChatbotTooltip">お急ぎの方はこちらから</span>
         </button>
     `;
