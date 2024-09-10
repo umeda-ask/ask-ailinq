@@ -52,22 +52,6 @@ const professionals = [
         type: "弁護士"
     },
     {
-        name: "正野 嘉人",
-        office: "Duelパートナー法律事務所",
-        freeFlg: "1",
-        email: "h.umeda@askpro.co.jp",
-        specialties: ["インターネット", "消費者被害", "借金"],
-        address: "東京都千代田区神田須田町1-2-7 淡路町駅前ビル9階",
-        description: "【淡路町駅、小川町徒歩1分】【30年以上の相談実績】【事前予約で土日祝も対応可能】インターネット問題、不当な商慣行、労働紛争、交通事故、相続、離婚など、様々な法律問題に対応！経験豊富な弁護士があなたのために戦います！",
-        phone: "03-6262-9980",
-        businessHours: "平日9:00～21:00",
-        image: "https://sharing.kigyou-askpro.com/aichat/image/duel1.jpg",
-        url: "lawyer_url2",
-        latitude: 35.695232,
-        longitude: 139.767767,
-        type: "弁護士"
-    },
-    {
         name: "大野 弘明",
         office: "Duelパートナー法律事務所",
         freeFlg: "1",
@@ -196,35 +180,35 @@ const professionals = [
         type: "弁護士"
     },
     {
-        name: "税理士名1",
-        office: "税理士事務所1",
+        name: "芦原 孝充",
+        office: "芦原会計事務所",
         freeFlg: "1",
         email: "h.umeda@askpro.co.jp",
-        specialties: ["税務申告", "資産運用", "相続税"],
-        address: "東京都港区○○ビル2階",
-        description: "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
-        phone: "222-333-4444",
+        specialties: ["税務申告", "資産運用", "相続税", "節税"],
+        address: "東京都文京区春日2-19-12 小石川ウォールズ6F",
+        description: "【江戸川橋駅・春日駅 徒歩5分】法人、個人のご相談を幅広く受けております。相続の事前対策、スモールビジネスを支援、各種税務のご相談はお任せください！",
+        phone: "03-5801-0815",
         businessHours: "09:00 - 18:00",
-        image: "https://via.placeholder.com/300x200",
+        image: "https://sharing.kigyou-askpro.com/aichat/image/ashihara.jpg",
         url: "taxaccountant_url1",
-        latitude: 35.662124,
-        longitude: 139.729501,
+        latitude: 35.711409,
+        longitude: 139.74438,
         type: "税理士"
     },
     {
-        name: "税理士名2",
-        office: "税理士事務所2",
-        freeFlg: "1",
+        name: "平野 壮司",
+        office: "税理士法人サンパートナーズオフィス",
+        freeFlg: "0",
         email: "h.umeda@askpro.co.jp",
-        specialties: ["法人税", "事業継承", "税務調査"],
-        address: "東京都新宿区○○ビル3階",
-        description: "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
-        phone: "555-666-7777",
-        businessHours: "10:00 - 19:00",
-        image: "https://via.placeholder.com/300x200",
+        specialties: ["法人税", "事業継承", "税務調査", "会社設立", "節税"],
+        address: "神奈川県厚木市旭町1-22-8 FMビル",
+        description: "【小田急線 本厚木駅徒歩5分】事前予約で夜間対応可！相続の専門家がお悩みを解決します！行政書士、CFPも在籍し、お悩みにワンストップで対応します！",
+        phone: "046-226-9980",
+        businessHours: "9:00 - 17:00",
+        image: "https://sharing.kigyou-askpro.com/aichat/image/sunpartner.jpg",
         url: "taxaccountant_url2",
-        latitude: 35.693256,
-        longitude: 139.704725,
+        latitude: 35.43711,
+        longitude: 139.363768,
         type: "税理士"
     },
 ];
@@ -733,7 +717,31 @@ function sendEmailToProfessionals() {
     const top5Professionals = nearbyProfessionals
         .sort((a, b) => a.distance - b.distance)
         .slice(0, 5);
-    // 選ばれた5つの事務所に対してメールを送信
+
+    // top5Professionalsが0件だった場合
+    if (top5Professionals.length === 0) {
+        // suport@askpro.co.jpにメールを送信
+        emailjs.send("askchatmail", "template_no_professional", {
+            user_name: userName,
+            user_address: userAddress,
+            user_phone: userPhone,
+            user_inquiry: userInquiry,
+            consultation_type: selectedConsultationType,
+            consultation_detail: selectedConsultationDetail,
+            email_recipient: "suport@askpro.co.jp"
+        })
+        .then(function(response) {
+            console.log('Email sent to suport@askpro.co.jp');
+        })
+        .catch(function(error) {
+            console.error('Failed to send email to suport@askpro.co.jp:', error);
+        });
+        
+        // 必要な他の処理
+        return; // ここで処理を終了してメール送信は行わない
+    }
+
+    // top5Professionalsがある場合、5件の事務所に対してメールを送信
     top5Professionals.forEach(professional => {
         emailjs.send("askchatmail", "template_k796y0o", {
             user_name: userName,
@@ -750,10 +758,12 @@ function sendEmailToProfessionals() {
         })
         .then(function(response) {
             console.log('Email sent successfully to:', professional.email);
-        }, function(error) {
-            console.log('Failed to send email to:', professional.email, error);
+        })
+        .catch(function(error) {
+            console.error('Failed to send email to:', professional.email, error);
         });
     });
+
 }
 
 
