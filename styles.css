@@ -1,0 +1,1107 @@
+#chatbot {
+    position: fixed;
+    bottom: 3%;
+    right: 2%;
+    width: 30%;
+    height: 98%;
+    border: 1px solid #CCCCCC; /* さらに明るいグレー */
+    background: #EEEEEE; /* さらに明るいグレー */
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: bottom right;
+    transition: opacity 0.1s ease, transform 0.1s ease;
+}
+
+#chatbot.show {
+    opacity: 1;
+    transform: scale(1);
+    display: flex;
+    z-index: 99999;
+}
+
+#chatbotHeader {
+    background: linear-gradient(135deg, #FF7F50, #FF8C00); /* オレンジ系のグラデーション */
+    color: white;
+    padding: 3%;
+    cursor: pointer;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シンプルな影 */
+    transition: background 0.3s ease, box-shadow 0.3s ease; /* スムーズなアニメーション */
+}
+
+#chatbotHeader span {
+    font-size: 2vw;
+}
+
+#phoneText {
+    color: #000000;
+}
+
+/* アイコンを元のデザインに戻す */
+#personIcon {
+    width: 3vw; /* アイコンの大きさを調整 */
+    height: 3vw; /* アイコンの大きさを調整 */
+    margin-right: 1vw; /* アイコンとテキストの間にスペースを追加 */
+}
+
+#chatbotPhone {
+    background: #FFB84D; /* 強いオレンジの薄い色 */
+    padding: 1%;
+    text-align: center;
+    font-size: 1.2vw;
+    border-top: 1px solid #CCCCCC; /* さらに明るいグレー */
+    border-bottom: 1px solid #CCCCCC; /* さらに明るいグレー */
+}
+
+#phoneLink {
+    color: #FF8C00; /* 強いオレンジ */
+    text-decoration: none;
+    font-size: 1.5vw;
+}
+
+#phoneLink:hover {
+    text-decoration: underline;
+}
+
+#chatbotMessages {
+    flex: 1;
+    padding: 3%;
+    overflow-y: scroll;
+    background-color: #DDDDDD; /* さらに明るいグレー */
+}
+
+#chatbotMessages ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#chatbotMessages li {
+    margin-bottom: 3%;
+    display: flex;
+}
+
+.left {
+    justify-content: flex-start;
+}
+
+.right {
+    justify-content: flex-end;
+}
+
+.chatbot-left, .chatbot-right {
+    max-width: 75%;
+    padding: 3%;
+    border-radius: 10px;
+    position: relative;
+    word-wrap: break-word;
+    color: #000000; /* 吹き出しの文字色を黒に設定 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    font-size: 1.5vw;
+}
+
+.chatbot-left {
+    background: #ffffff; /* 左側の吹き出しの背景を白に設定 */
+    border: 1px solid #ccc;
+}
+
+.chatbot-left::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: -20px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right-color: #ffffff; /* 吹き出しの矢印も白に設定 */
+}
+
+.chatbot-right {
+    background: #ffffff; /* 右側の吹き出しの背景も白に設定 */
+}
+
+.chatbot-right::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: -20px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-left-color: #ffffff; /* 吹き出しの矢印も白に設定 */
+}
+
+
+#chatbotInput {
+    display: flex;
+    padding: 3%;
+    border-top: 1px solid #CCCCCC; /* さらに明るいグレー */
+    background: #EEEEEE; /* さらに明るいグレー */
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#chatbotInput input {
+    flex: 1;
+    padding: 3%;
+    border: 1px solid #CCCCCC; /* さらに明るいグレー */
+    border-radius: 5px;
+    margin-right: 1%;
+    background-color: #FFF; /* さらに明るいグレー */
+    color: #000000; /* 黒色 */
+}
+
+/* テキストエリアのスタイル */
+#messageInput {
+  background-color: white; /* 背景色を白に設定 */
+  border: 1px solid #ccc; /* ボーダーをグレーに設定 */
+  border-radius: 5px; /* 角を少し丸める */
+  padding: 1%; /* 余白を設定 */
+  width: calc(100% - 60px); /* ボタンに合わせて幅を調整 */
+  height: 8vh; /* 高さをボタンと揃える */
+  box-sizing: border-box; /* 余白を含めたボックスモデル */
+  resize: none; /* サイズ変更を無効化 */
+  -webkit-appearance: none; /* Webkitブラウザの矢印を非表示 */
+}
+
+/* 送信ボタンのスタイル */
+#sendMessage {
+  background-color: #FF9900; /* 鮮やかなオレンジに設定 */
+  color: white; /* テキストの色を白に設定 */
+  border: none; /* ボーダーを削除 */
+  border-radius: 5px; /* 角を少し丸める */
+  font-size: 1em; /* テキストサイズを大きく */
+  cursor: pointer; /* マウスカーソルをポインターに変更 */
+  box-sizing: border-box;
+  transition: background-color 0.3s ease; /* 背景色変更時のアニメーション */
+  width: 20%;
+  margin: 0% 0% 0% 2%;
+}
+
+/* ボタンのホバー効果 */
+#sendMessage:hover {
+  background-color: #e68a00; /* ホバー時に少し暗いオレンジに */
+}
+
+#sendMessage:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+/* 開く/閉じるアイコンのデザイン */
+#openChatbot {
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    width: 6vw; /* 幅をビュー幅に基づいて設定 */
+    height: 6vw; /* 高さを幅と同じに設定 */
+    background: linear-gradient(135deg, #FF9800, #FFB74D); /* オレンジのグラデーション */
+    border: none;
+    cursor: pointer;
+    border-radius: 50%; /* 丸型ボタン */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 影を追加 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, opacity 0.1s ease;
+    z-index: 99999;
+}
+
+#openChatbot:hover {
+    transform: scale(1.1); /* ホバー時に少し拡大 */
+    background: linear-gradient(135deg, #FFB74D, #FFA726); /* ホバー時にグラデーションを変更 */
+}
+
+#openChatbot img {
+    width: 50%; /* 画像の大きさを調整 */
+    height: 50%;
+}
+
+#openChatbotTooltip {
+    display: block;
+    position: absolute;
+    top: -80%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7); /* 元の黒の半透明背景 */
+    color: white;
+    padding: 0.8vw 1.5vw;
+    border-radius: 15px;
+    font-size: 1.2vw;
+    white-space: nowrap;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* 強調されたシャドウ */
+    backdrop-filter: blur(10px); /* 背景のぼかし効果を強調 */
+    z-index: 100000;
+    opacity: 1;
+    transition: none;
+    animation: none;
+}
+
+#openChatbotTooltip::after {
+    content: "";
+    position: absolute;
+    bottom: -1vw;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 1vw 1vw 0 1vw;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent; /* 矢印も元の黒に */
+}
+
+/* 開閉ボタンを押したときの変化 */
+#openChatbot.hide {
+    transform: scale(0.8);
+    opacity: 0;
+}
+
+.choice-button {
+    background: linear-gradient(to right, #FF8C00, #FFB84D); /* 強いオレンジのグラデーション */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 25px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.choice-button:hover {
+    background: linear-gradient(to right, #FF7F00, #FF8C00); /* さらに濃いオレンジ */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.choice-button:active {
+    background: linear-gradient(to right, #FF6600, #FF7F00); /* 最も濃いオレンジ */
+    transform: translateY(2px);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.choice-button-disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+@media (max-width: 768px) {
+    .choice-button {
+        width: 45vw;
+        height: 40px;
+    }
+    #openChatbotTooltip {
+        font-size: 4vw;
+        writing-mode: vertical-rl;
+        top: -270%;
+    }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+}
+
+.loading span {
+    display: inline-block;
+    margin: 0 2px;
+    width: 0.8vw;
+    height: 0.8vw;
+    background-color: #000;
+    border-radius: 50%;
+    animation: blink 1.4s infinite both;
+}
+
+.loading span:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.loading span:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.loading span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@media (max-width: 768px) {
+    .loading span {
+        width: 2.5vw;
+        height: 2.5vw;
+    }
+}
+
+@media (max-width: 768px) {
+    #chatbot {
+        width: 95%;
+        height: 95%;
+    }
+
+    #openChatbot {
+        width: 17vw; /* Increase width for mobile devices */
+        height: 17vw; /* Increase height for mobile devices */
+    }
+
+    #openChatbot img {
+        width: 50%; /* Adjust based on parent size */
+        height: 50%; /* Adjust based on parent size */
+    }
+
+    #chatbotHeader span {
+        font-size: 6vw;
+    }
+}
+.choice-button {
+    font-size: 1.4vw; /* ボタンの文字を少し大きく */
+}
+@media (max-width: 768px) {
+    .choice-button {
+        font-size: 4vw; /* スマホ用にさらに大きく */
+    }
+}
+
+
+
+#openChatbot {
+    position: fixed;
+    bottom: 2%;
+    right: 5%;
+    width: 6vw;
+    height: 6vw;
+    background: #ff7f50; /* オレンジ */
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100000;
+    animation: bounce 0.7s infinite;
+    transition: background 0.3s ease; /* スムーズな色の変化 */
+}
+
+#openChatbot:hover {
+    background: #ff0000; /* ホバー時に鮮やかな赤 */
+}
+
+#openChatbot img {
+    width: 50%;
+    height: 50%;
+}
+
+/* バウンスアニメーション */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20%);
+    }
+}
+
+@media (max-width: 768px) {
+    #openChatbot {
+        width: 17vw; /* Increase width for mobile devices */
+        height: 17vw; /* Increase height for mobile devices */
+        bottom: 12%;
+        right: 5%;
+        z-index: 99999;
+    }
+
+    #openChatbot:hover {
+        transform: none; /* スマホ時に拡大しない */
+    }
+
+    #openChatbot img {
+        width: 50%; /* Adjust based on parent size */
+        height: 50%; /* Adjust based on parent size */
+    }
+    
+    .chatbot-left, .chatbot-right {
+        font-size: 4vw;
+    }
+    
+    #chatbotPhone {
+        font-size: 4vw; /* フォントサイズを小さく設定 */
+    }
+    
+    #phoneLink {
+        font-size: 5vw; /* リンクのフォントサイズを大きく設定 */
+    }
+    
+}
+
+/* トグルボタンのスタイル */
+.toggle-button {
+    background-color: #B3CDE0;
+    border: none;
+    color: #336699;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 20px;
+    width: 60px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1.2vw; /* Adjust based on viewport size */
+}
+
+.toggle-button.on {
+    background-color: #336699;
+    transform: scale(1.1); /* Button slightly enlarges when active */
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .toggle-button {
+        font-size: 4vw; /* Adjust for mobile devices */
+    }
+}
+
+#chatbotSettingsContainer {
+    width: 100%;
+    background-color: #E5E5E5;
+}
+
+#chatbotSettingsHeader {
+    background: #336699;
+    color: white;
+    padding: 1%;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#chatbotSettingsHeader span {
+    font-size: 1.2vw; /* Adjust as needed */
+}
+
+.hidden {
+    display: none;
+}
+
+/* トグルボタンのスタイル */
+.toggle-button {
+    background-color: #B3CDE0;
+    border: none;
+    color: #336699;
+    padding: 2%;
+    cursor: pointer;
+    border-radius: 15px;
+    width: 18%;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1.2vw; /* Adjust based on viewport size */
+}
+
+.toggle-button.on {
+    background-color: #336699;
+    transform: scale(1.1); /* Button slightly enlarges when active */
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1% 0% 1%;
+    color: black;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .toggle-button {
+        font-size: 4vw; /* Adjust for mobile devices */
+    }
+
+    #chatbotSettingsHeader span {
+        font-size: 4vw; /* Adjust for mobile devices */
+    }
+}
+
+.toggle-button {
+    background-color: #eb8333;
+}
+
+.hidden {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+#chatbotSettings {
+    max-height: 0; /* 初期値は0 */
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+/* デフォルト（PCサイズ用）のスタイル */
+.chat-bubble {
+    width: 100%; /* 幅を調整 */
+    padding: 0; /* px削除 */
+    border-radius: 15px; /* ここはpxのまま維持 */
+    background-color: #E5E5E5;
+    overflow-x: auto;
+    white-space: nowrap;
+    box-shadow: 0 2% 8% rgba(0, 0, 0, 0.1);
+}
+
+.lawyer-list {
+    display: flex;
+    gap: 2%;
+    flex-wrap: nowrap; /* カードが横に並ぶようにする */
+    overflow-x: auto; /* 横スクロールを有効にする */
+}
+
+/* 全体のボックススタイル */
+.lawyer-card {
+    width: 100%; /* 幅を100%に設定 */
+    margin: 0; /* 上下に適切なマージンを追加 */
+    padding: 5% 5% 5% 5%;;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #B3CDE0;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* 画像スタイル */
+.lawyer-card__image {
+    height: 20vh;
+    object-fit: cover; /* 画像が指定された領域に収まるように調整 */
+    aspect-ratio: 3 / 2; /* 縦横比を3:2に固定 */
+    border-radius: 8px;
+    margin-bottom: 2%;
+}
+
+/* 弁護士名のスタイル */
+.lawyer-card__name {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem; /* サイズを指定 */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 2%;
+}
+
+.lawyer-card__name::before {
+    content: "\1F464"; /* 専門家を表すアイコン（人物アイコン）を表示 */
+    margin-right: 8px; /* アイコンとテキストの間にスペースを追加 */
+    font-size: 1.5rem; /* アイコンのサイズをテキストに合わせて調整 */
+    color: #333; /* アイコンの色を設定 */
+}
+
+/* 事務所名のスタイル */
+.lawyer-card__office {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 2%;
+}
+
+/* 距離のスタイル */
+.lawyer-card__distance {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 2%;
+    display: flex;
+    align-items: center;
+}
+
+.lawyer-card__distance::before {
+    content: "\1F4CD"; /* ピンのアイコンを追加 */
+    margin-right: 4px;
+}
+
+/* 分野のスタイル */
+.lawyer-card__specialties-container {
+    display: flex;
+    flex-wrap: nowrap; /* 折り返さずに横に並べる */
+    overflow-x: auto; /* 横スクロールを許可 */
+    gap: 4px; /* アイコン間のスペースを設定 */
+    scrollbar-width: none; /* Firefox用: スクロールバーを隠す */
+}
+
+.lawyer-card__specialties-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari用: スクロールバーを隠す */
+}
+
+.specialty-item {
+    margin: 1%;
+    background-color: #f0f0f0;
+    color: #555;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    flex: 1 1 auto; /* アイテムを最大幅に広げる */
+    max-width: calc(50% - 4px); /* 各アイテムの最大幅を設定して2列にする */
+    box-sizing: border-box; /* ボックスサイズを調整 */
+}
+
+.lawyer-card__address {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 最大3行に制限 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal; /* 通常のスペース処理を適用 */
+    word-wrap: break-word; /* 単語の折り返しを許可 */
+    overflow-wrap: break-word; /* 単語の折り返しを許可 */
+}
+
+.lawyer-card__address {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem; /* フォントサイズの調整 */
+    color: #555; /* テキストカラーの設定 */
+    margin-bottom: 2%;
+}
+
+.lawyer-card__address::before {
+    content: "\1F3E2"; /* ビルのアイコンを表示 */
+    margin-right: 4px; /* アイコンとテキストの間にスペースを追加 */
+    font-size: 1rem; /* アイコンのサイズを調整 */
+}
+
+/* 紹介文のスタイル */
+.lawyer-card__description {
+    font-size: 0.8rem;
+    color: #333;
+    background-color: #f9f9f9; /* シンプルな背景色 */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd; /* シンプルな境界線 */
+    margin-bottom: 2%;
+    line-height: 1.2;
+    max-height: 11vh; /* 高さの上限を設定 */
+    overflow-y: auto; /* はみ出した場合は縦スクロールを有効に */
+    text-overflow: clip; /* テキストがはみ出した場合に切り取る */
+    white-space: normal; /* 通常のスペース処理を適用 */
+    word-wrap: break-word; /* 単語の折り返しを許可 */
+    overflow-wrap: break-word; /* 単語の折り返しを許可 */
+}
+
+/* スクロールバーのスタイルを統一 */
+.lawyer-card__description::-webkit-scrollbar {
+    width: 8px;
+}
+
+.lawyer-card__description::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+    border-radius: 4px;
+}
+
+.lawyer-card__description::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+}
+
+.lawyer-card__address::before {
+    content: "\1F3E2"; /* ビルのアイコンを追加 */
+    margin-right: 4px;
+}
+
+/* リンクのスタイル */
+.lawyer-card__link {
+    font-size: 0.9rem; /* リンクの文字サイズを小さく調整 */
+    color: #336699;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 12px;
+    transition: color 0.2s;
+}
+
+.lawyer-card__link:hover {
+    color: #284B63; /* ホバー時の色を調整 */
+    text-decoration: underline; /* ホバー時に下線を表示 */
+}
+
+/* リボンのスタイル */
+.lawyer-card__ribbon {
+    position: absolute;
+    top: 2%;
+    left: 1%;
+    width: 50%;
+    height: 6%;
+    background: linear-gradient(to right, #FF4500, #FF6347); /* オレンジレッドからトマトのグラデーション */
+    color: #ffffff; /* 白文字 */
+    text-align: center;
+    line-height: 2rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 15px; /* 角を丸くして親しみやすさを強調 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial Rounded MT Bold', sans-serif; /* 丸みを帯びたフォント */
+    animation: blink 1s infinite; /* 点滅アニメーション */
+}
+
+/* 点滅アニメーション */
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0; /* 半透明にして点滅させる */
+    }
+}
+
+/* 弁護士住所のスタイル調整（PC表示用） */
+.lawyer-card__address {
+    font-size: 0.8rem; /* 文字サイズを調整 */
+    color: #555;
+    display: flex;
+    align-items: center;
+    word-wrap: break-word !important; /* 折り返しを許可 */
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    width: 100%; /* 幅の制限を追加 */
+    margin-bottom: 2%;
+}
+
+
+/* モバイルサイズ用のスタイル */
+@media (max-width: 768px) {
+    .lawyer-card {
+        width: 100%;
+        padding: 1vh;
+        margin: 0;
+    }
+
+    .lawyer-card__name {
+        font-size: 1.4rem;
+        margin-bottom: 2%;
+    }
+
+    .lawyer-card__office {
+        font-size: 1rem;
+        margin-bottom: 2%;
+    }
+
+    .lawyer-card__distance {
+        font-size: 0.8rem;
+        margin-bottom: 2%;
+    }
+
+    .lawyer-card__specialties-container {
+        margin-bottom: 2%;
+    }
+
+    .specialty-item {
+        font-size: 0.9rem;
+        margin-right: 8px;
+        margin-bottom: 4px;
+        max-width: calc(50% - 2px); /* モバイルでの列間スペースを調整 */
+    }
+
+    .lawyer-card__description {
+        font-size: 0.8rem;
+        margin-bottom: 2%;
+    }
+
+    .lawyer-card__address {
+        font-size: 0.6rem;
+        color: #555;
+        display: flex;
+        align-items: center;
+        word-wrap: break-word !important; /* 折り返しを許可 */
+        overflow-wrap: break-word !重要;
+        white-space: normal !important;
+        width: 100%; /* 幅の制限を追加 */
+        margin-bottom: 2%;
+    }
+
+    .lawyer-card__link {
+        font-size: 1rem;
+        margin-top: 12px;
+    }
+
+    .lawyer-card__ribbon {
+        top: 1%;
+        left: 1%;
+        width: 50%;
+        height: 6%;
+        font-size: 0.7rem;
+    }
+}
+
+.lawyer-card__phone a {
+    font-size: 1.8vw; /* 電話番号の文字サイズをビューポート幅に基づいて調整 */
+    font-weight: bold; /* 太字に */
+    color: #ffffff; /* 文字色を白に */
+    text-decoration: none; /* 下線を除去 */
+    display: inline-block;
+    padding: 1% 2%; /* パディングを調整 */
+    border-radius: 10px; /* 角を少し丸める */
+    background: linear-gradient(135deg, #FF6A00, #FF0000); /* オレンジから赤へのグラデーション */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シンプルな影 */
+    transition: background 0.3s ease, box-shadow 0.3s ease; /* スムーズなアニメーション */
+    width: 100%; /* ボタン幅を100%にして親要素に合わせる */
+    box-sizing: border-box; /* パディングを含めたサイズ計算 */
+    text-align: center; /* テキストを中央揃え */
+    overflow: hidden; /* 文字がはみ出るのを防ぐ */
+    white-space: nowrap; /* テキストを1行にする */
+    text-overflow: ellipsis; /* テキストが長い場合に省略記号を表示 */
+    line-height: 1.2; /* 行間を調整して高さをさらに抑える */
+    margin-bottom: 0; /* ボタンと「詳しく見る」の間のスペースを完全に無くす */
+    border: 2px solid transparent; /* 透明なボーダーで微細なエフェクト */
+    animation: float 0.8s ease-in-out infinite; /* 常に動くアニメーションを追加 */
+}
+
+/* ボタンの常に動くアニメーション */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(2%);
+    }
+    50% {
+        transform: translateY(-2%);
+    }
+}
+
+.lawyer-card__phone a:hover {
+    background: linear-gradient(135deg, #FF4500, #FF6347); /* ホバー時に赤みを強調 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 影を強調 */
+    border-color: #ffffff; /* ホバー時にボーダーを白に変更 */
+}
+
+/* 営業時間のスタイル */
+.lawyer-card__phone .business-hours {
+    font-size: 1.2vw; /* 営業時間の文字サイズをビューポート幅に基づいて調整 */
+    color: #ffffff; /* 営業時間の文字色も白に */
+    line-height: 1; /* 行間を狭くして高さを抑える */
+}
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+    .lawyer-card__phone {
+        width: auto; /* 吹き出しに合わせて幅を調整 */
+        padding: 1% 2%; /* パディングを調整 */
+        font-size: 3.5vw; /* 文字サイズを少し小さく調整 */
+    }
+    .lawyer-card__phone a {
+        font-size: 6vw; /* スマホの場合の文字サイズを調整 */
+        padding: 2% 1%; /* 高さと幅をスマホに合わせて調整 */
+    }
+
+    .lawyer-card__phone .business-hours {
+        font-size: 4vw; /* スマホの場合の営業時間の文字サイズを調整 */
+        line-height: 1; /* 行間を狭くして高さを抑える */
+    }
+
+    .lawyer-card__footer {
+        margin-top: 0; /* スマホの場合もスペースを完全に無くす */
+        padding-top: 0.5%; /* 少しだけスペースを残す */
+    }
+}
+
+.lawyer-card__phone:active {
+    transform: translateY(2px); /* クリック時にボタンが押し込まれる効果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* クリック時の影 */
+    border-color: #228B22; /* クリック時にボーダーの色を戻す */
+}
+
+/* スムーズスクロール */
+.lawyer-list {
+    display: flex;
+    gap: 2%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth; /* スムーズなスクロール */
+}
+
+/* カスタムスクロールバー */
+.lawyer-list::-webkit-scrollbar {
+    height: 2vh; /* スクロールバーの高さを調整 */
+}
+
+.lawyer-list::-webkit-scrollbar-thumb {
+    background-color: #336699; /* スクロールバーの色 */
+    border-radius: 10px; /* 角を丸くする */
+}
+
+/* 弁護士カードのホバーエフェクト */
+.lawyer-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lawyer-card:hover {
+    transform: translateY(-5px); /* ホバー時にカードを少し持ち上げる */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 影を強調する */
+}
+
+/* モバイル向けの調整 */
+@media (max-width: 768px) {
+    .lawyer-list {
+        gap: 4%; /* モバイルでの間隔を広げる */
+    }
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .lawyer-card__phone {
+        width: 100%; /* 親要素の幅に合わせて表示 */
+        box-sizing: border-box; /* ボックスサイズを調整 */
+        text-align: center; /* テキストを中央に揃える */
+    }
+}
+
+/* lawyer-card__footer内の詳しく見るリンクのスタイル調整 */
+.lawyer-card__footer{
+    font-size: 0.9rem; /* リンクの文字サイズを小さく調整 */
+    color: #336699;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 2%;
+    transition: color 0.2s;
+    text-align: center;
+}
+
+.lawyer-card__footer:hover {
+    color: #284B63; /* ホバー時の色を調整 */
+    text-decoration: underline; /* ホバー時に下線を表示 */
+}
+
+/* 2キロ以下の距離を目立たせるスタイル */
+.nearby {
+    background-color: #ffcc00; /* 背景色を明るい色に */
+    color: #000000; /* 文字色を黒に */
+    font-weight: bold; /* 文字を太字に */
+    display: inline-block;
+}
+
+/* くるくるアニメーション用のCSS */
+.loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border-left-color: #09f;
+    margin-right: 10px;
+    display: inline-block;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.choice-buttons-container {
+    max-height: 60vh; /* 表示領域の高さを制限 */
+    overflow-y: auto; /* 縦スクロールを有効に */
+    padding: 0.5% 0; /* パディングを追加 */
+}
+
+/* スクロールバーのスタイル調整 */
+.choice-buttons-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.choice-buttons-container::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+    border-radius: 4px;
+}
+
+.choice-buttons-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.lawyer-list {
+    display: flex;
+    gap: 2%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth; /* スムーズなスクロール */
+    position: relative;
+    padding-right: 20px; /* 右端に余白を追加して矢印を表示 */
+}
+
+.lawyer-list.show-arrow::after {
+    content: '';
+    position: absolute;
+    bottom: 5%; /* 下段に配置 */
+    right: 10%;
+    width: 15%; /* 矢印画像の幅 */
+    height: 5%; /* 矢印画像の高さ */
+    background-image: url('yajirushi.png'); /* 矢印画像を使用 */
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none; /* 画像がクリックの対象とならないようにする */
+    z-index: 1;
+    opacity: 0;
+    animation: fadeInOut 6s forwards, slideHint 0.8s infinite 1s; /* 透明度とスライドアニメーションを組み合わせ */
+}
+
+.lawyer-list.show-arrow::before {
+    content: 'スライドできます';
+    position: absolute;
+    bottom: 0%; /* 矢印の下に配置 */
+    right: 2%;
+    font-size: 2vh; /* メッセージを小さく */
+    color: #666666; /* メッセージの色 */
+    z-index: 2; /* 矢印の上に表示 */
+    text-align: center;
+    opacity: 0;
+    animation: fadeInOut 5s forwards; /* 透明度のアニメーションのみ適用 */
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes slideHint {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px); /* 右に動かしてスライドを示唆 */
+    }
+}
+
+textarea {
+    width: 100%;
+    resize: none; /* サイズ変更不可 */
+    white-space: pre-wrap; /* 改行を保持しつつ折り返し */
+    overflow-wrap: break-word; /* 長い単語が折り返される */
+}
