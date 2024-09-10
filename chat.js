@@ -720,7 +720,7 @@ function sendEmailToProfessionals() {
 
     // top5Professionalsが0件だった場合
     if (top5Professionals.length === 0) {
-        // suport@askpro.co.jpにメールを送信
+        // support@askpro.co.jpにメールを送信
         emailjs.send("askchatmail", "template_k796y0o", {
             user_name: userName,
             user_address: userAddress,
@@ -728,13 +728,13 @@ function sendEmailToProfessionals() {
             user_inquiry: userInquiry,
             consultation_type: selectedConsultationType,
             consultation_detail: selectedConsultationDetail,
-            professional_email: "suport@askpro.co.jp"
+            professional_email: "support@askpro.co.jp"
         })
         .then(function(response) {
-            console.log('Email sent to suport@askpro.co.jp');
+            console.log('Email sent to support@askpro.co.jp');
         })
         .catch(function(error) {
-            console.error('Failed to send email to suport@askpro.co.jp:', error);
+            console.error('Failed to send email to support@askpro.co.jp:', error);
         });
         
         // 必要な他の処理
