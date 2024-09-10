@@ -634,7 +634,7 @@ window.displayProfessionalInfo = function(type) {
     let professionalInfoHTML = `<div class="chat-bubble"><div class="lawyer-list">`;
 
     top5Professionals.forEach(professional => {
-        const distanceClass = professional.distance <= 2.0 ? 'nearby' : '';
+        const distanceClass = professional.distance <= 5.0 ? 'nearby' : '';
         const ribbonHTML = professional.freeFlg === "1" ? `<span class="lawyer-card__ribbon">初回相談無料</span>` : '';
 
         professionalInfoHTML += `
@@ -728,7 +728,7 @@ function sendEmailToProfessionals() {
             user_inquiry: userInquiry,
             consultation_type: selectedConsultationType,
             consultation_detail: selectedConsultationDetail,
-            email_recipient: "suport@askpro.co.jp"
+            professional_email: "suport@askpro.co.jp"
         })
         .then(function(response) {
             console.log('Email sent to suport@askpro.co.jp');
