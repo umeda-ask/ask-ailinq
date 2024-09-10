@@ -721,7 +721,7 @@ function sendEmailToProfessionals() {
     // top5Professionalsが0件だった場合
     if (top5Professionals.length === 0) {
         // suport@askpro.co.jpにメールを送信
-        emailjs.send("askchatmail", "template_no_professional", {
+        emailjs.send("askchatmail", "template_k796y0o", {
             user_name: userName,
             user_address: userAddress,
             user_phone: userPhone,
