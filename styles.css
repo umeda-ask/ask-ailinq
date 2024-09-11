@@ -106,7 +106,7 @@
     word-wrap: break-word;
     color: #000000; /* 吹き出しの文字色を黒に設定 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
-    font-size: 1.5vw;
+    font-size: 1.4vw; !important
 }
 
 .chatbot-left {
@@ -337,7 +337,7 @@
     }
 }
 .choice-button {
-    font-size: 1.4vw; /* ボタンの文字を少し大きく */
+    font-size: 1.2vw; /* ボタンの文字を少し大きく */
 }
 @media (max-width: 768px) {
     .choice-button {
@@ -569,7 +569,7 @@
 
 /* 画像スタイル */
 .lawyer-card__image {
-    height: 20vh;
+    max-height: 20vh;
     object-fit: cover; /* 画像が指定された領域に収まるように調整 */
     aspect-ratio: 3 / 2; /* 縦横比を3:2に固定 */
     border-radius: 8px;

@@ -596,29 +596,36 @@ window.displayProfessionalInfo = function(type) {
     );
 
     if (selectedProfessionals.length === 0) {
-        let noResultHTML = `<div class="">`;
-        noResultHTML += `
-            <span>お近くに対応できる専門家が見つかりませんでした。</span>
-            <br>
-            <span>こちらの番号にお電話ください: <a href="tel:050-5578-9800" style="color: #0000EE; font-weight: bold; text-decoration: underline;">050-5578-9800</a></span>
+        let noResultHTML = `
+            <div class="">
+                <span>申し訳ありません。お近くに対応できる専門家が見つかりませんでした。</span>
+                <br>
+                <span>適切な専門家をお探しするにはこちらの番号にお電話ください: <br><a href="tel:050-5578-9800" style="color: #0000EE; font-weight: bold; text-decoration: underline;">050-5578-9800</a></span>
+            </div>
         `;
-        noResultHTML += `</div>`;
 
         const div = document.createElement('div');
         div.classList.add('chatbot-left');
         div.innerHTML = noResultHTML;
-        document.getElementById('chatbot-ul').appendChild(div);
+        
+        // 空白の吹き出しが追加されないようにする
+        if (noResultHTML.trim() !== "") {
+            document.getElementById('chatbot-ul').appendChild(div);
+        }
 
-        // スペースを追加
-        const spaceDiv = document.createElement('div');
-        spaceDiv.style.marginBottom = '2%'; // スペースの高さを指定
-        document.getElementById('chatbot-ul').appendChild(spaceDiv);
+        // 「最初に戻る」ボタンを追加
+        const backButton = document.createElement('button');
+        backButton.textContent = '最初に戻る';
+        backButton.classList.add('choice-button');
+        backButton.onclick = () => {
+            robotCount = 1;
+            userCount = 0;
+            robotOutput();
+        };
+        div.appendChild(backButton);
 
         scrollChatToBottom();
 
-        // ステップ11を出力
-        robotCount = 10;
-        robotOutput();
         return;
 
     }
@@ -742,7 +749,7 @@ function sendEmailToProfessionals() {
     }
 
     // top5Professionalsがある場合、5件の事務所に対してメールを送信
-    top5Professionals.forEach(professional => {
+    for (const professional of top5Professionals) {
         emailjs.send("askchatmail", "template_k796y0o", {
             user_name: userName,
             user_address: userAddress,
@@ -762,7 +769,10 @@ function sendEmailToProfessionals() {
         .catch(function(error) {
             console.error('Failed to send email to:', professional.email, error);
         });
-    });
+
+        // ここで1秒間の同期スリープを挿入
+        sleepSync(1000);  // 1000ms = 1秒
+    }
 
 }
 
@@ -882,4 +892,12 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
         Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
+}
+
+// 同期的なスリープ関数
+function sleepSync(milliseconds) {
+    const start = new Date().getTime();
+    while (new Date().getTime() - start < milliseconds) {
+        // 何もしない（ビジーウェイト）
+    }
 }
