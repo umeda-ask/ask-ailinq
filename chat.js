@@ -742,8 +742,8 @@ function sendEmailToProfessionals() {
     }
 
     // top5Professionalsがある場合、5件の事務所に対してメールを送信
-    for (const professional of top5Professionals) {
-        await emailjs.send("askchatmail", "template_k796y0o", {
+    top5Professionals.forEach(professional => {
+        emailjs.send("askchatmail", "template_k796y0o", {
             user_name: userName,
             user_address: userAddress,
             user_phone: userPhone,
@@ -762,10 +762,7 @@ function sendEmailToProfessionals() {
         .catch(function(error) {
             console.error('Failed to send email to:', professional.email, error);
         });
-
-        // ここで1秒間のスリープを挿入
-        await sleep(1000);  // 1000ms = 1秒
-    }
+    });
 
 }
 
@@ -885,9 +882,4 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
         Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
-}
-
-// スリープ関数
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
