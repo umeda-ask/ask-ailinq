@@ -77,7 +77,7 @@ const professionals = [
         description: "【みなと元町駅徒歩1分】【初回相談無料】複雑な問題も分かりやすくご説明します。クライアント一人ひとりに対して誠実かつ献身的なサポートを提供し、法律問題を解決に導きます。",
         phone: "078-367-6880",
         businessHours: "平日9:00～17:00",
-        image: "https://sharing.kigyou-askpro.com/aichat/image/duel2.png",
+        image: "https://sharing.kigyou-askpro.com/aichat/image/minatomo.jpg",
         url: "lawyer_url2",
         latitude: 34.685957,
         longitude: 135.184551,
