@@ -725,6 +725,8 @@ function sendEmailToProfessionals() {
         .sort((a, b) => a.distance - b.distance)
         .slice(0, 5);
 
+    const current_time = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+
     // top5Professionalsが0件だった場合
     if (top5Professionals.length === 0) {
         // contact@askpro.co.jpにメールを送信
@@ -735,7 +737,8 @@ function sendEmailToProfessionals() {
             user_inquiry: userInquiry,
             consultation_type: selectedConsultationType,
             consultation_detail: selectedConsultationDetail,
-            professional_email: "contact@askpro.co.jp"
+            professional_email: "contact@askpro.co.jp",
+            current_time: current_time
         })
         .then(function(response) {
             console.log('Email sent to support@askpro.co.jp');
@@ -761,7 +764,8 @@ function sendEmailToProfessionals() {
             professional_office: professional.office,
             professional_email: professional.email,
             professional_address: professional.address,
-            professional_description: professional.description
+            professional_description: professional.description,
+            current_time: current_time
         })
         .then(function(response) {
             console.log('Email sent successfully to:', professional.email);
