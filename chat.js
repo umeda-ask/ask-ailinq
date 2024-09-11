@@ -440,7 +440,7 @@ function robotOutput() {
         } else {
             switch (currentChat.option) {
                 case 'normal':
-                    div.innerHTML = currentChat.text.title;
+                    div.innerHTML = currentChat.text;
                     break;
                 case 'random':
                     div.innerHTML = currentChat.text[Math.floor(Math.random() * currentChat.text.length)];
