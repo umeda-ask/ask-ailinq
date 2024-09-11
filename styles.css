@@ -729,14 +729,16 @@
     height: 6%;
     background: linear-gradient(to right, #FF4500, #FF6347); /* オレンジレッドからトマトのグラデーション */
     color: #ffffff; /* 白文字 */
-    text-align: center;
     line-height: 2rem;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     font-weight: bold;
     border-radius: 15px; /* 角を丸くして親しみやすさを強調 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: 'Arial Rounded MT Bold', sans-serif; /* 丸みを帯びたフォント */
     animation: blink 1s infinite; /* 点滅アニメーション */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* 点滅アニメーション */
@@ -824,7 +826,7 @@
         left: 1%;
         width: 50%;
         height: 6%;
-        font-size: 0.7rem;
+        font-size: 1.2rem;
     }
 }
 
