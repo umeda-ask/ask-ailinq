@@ -200,35 +200,6 @@
     cursor: not-allowed;
 }
 
-/* 開く/閉じるアイコンのデザイン */
-#openChatbot {
-    position: fixed;
-    bottom: 2%;
-    right: 2%;
-    width: 6vw; /* 幅をビュー幅に基づいて設定 */
-    height: 6vw; /* 高さを幅と同じに設定 */
-    background: linear-gradient(135deg, #FF9800, #FFB74D); /* オレンジのグラデーション */
-    border: none;
-    cursor: pointer;
-    border-radius: 50%; /* 丸型ボタン */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 影を追加 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s ease, opacity 0.1s ease;
-    z-index: 99999;
-}
-
-#openChatbot:hover {
-    transform: scale(1.1); /* ホバー時に少し拡大 */
-    background: linear-gradient(135deg, #FFB74D, #FFA726); /* ホバー時にグラデーションを変更 */
-}
-
-#openChatbot img {
-    width: 50%; /* 画像の大きさを調整 */
-    height: 50%;
-}
-
 #openChatbotTooltip {
     display: block;
     position: absolute;
@@ -258,12 +229,6 @@
     border-width: 1vw 1vw 0 1vw;
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent; /* 矢印も元の黒に */
-}
-
-/* 開閉ボタンを押したときの変化 */
-#openChatbot.hide {
-    transform: scale(0.8);
-    opacity: 0;
 }
 
 .choice-button {
@@ -399,6 +364,12 @@
     z-index: 100000;
     animation: bounce 0.7s infinite;
     transition: background 0.3s ease; /* スムーズな色の変化 */
+}
+
+#openChatbot.hide {
+    transform: scale(0.8);
+    opacity: 0; /* 透明にする */
+    pointer-events: none; /* 透明時はクリックできないようにする */
 }
 
 #openChatbot:hover {
