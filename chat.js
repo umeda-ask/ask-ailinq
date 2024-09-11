@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 const chatList = {
     1: { text: 'アスクプロ相談サポート お問い合わせチャットへようこそ。', continue: true, option: 'normal', return: false },
     2: { text: { title: '以下よりお問い合わせ内容を選んでください。', choices: ['相談受付', '専門家を探す'] }, continue: false, option: 'choices', return: true },
-    3: { text: { title: 'お問い合わせ内容を選択してください。また、お近くの専門家をご案内するために位置情報を許可してください。', choices: ['法律相談', '税務相談'] }, continue: false, option: 'choices', return: true },
+    3: { text: { title: 'お問い合わせ内容を選択してください。<br>また、位置情報を許可することでお近くの専門家をご案内することが可能です。', choices: ['法律相談', '税務相談'] }, continue: false, option: 'choices', return: true },
     4: { text: { title: '法律相談内容を選択してください。', choices: ['離婚・男女問題', '借金', '相続', '交通事故', 'インターネット', '消費者被害', '犯罪・刑事事件', '労働', '債権回収', '不動産・建築', '国際・外国人問題', '医療', '企業法務'] }, continue: false, option: 'choices', return: false },
     5: { text: { title: '税務相談内容を選択してください。', choices: ['顧問税理士', '経理・決算', '税務調査', '資金調達', '節税', '会社設立', '確定申告', '相続税', '税金・お金'] }, continue: false, option: 'choices', return: false },
     6: { text: 'お名前をフルネームで入力して送信ボタンを押してください', continue: false, option: 'normal', return: false },
@@ -290,7 +290,7 @@ const chatList = {
     8: { text: '専門家のご連絡を受け取れるお電話番号を入力して送信ボタンを押してください。(例:0901111XXXX)', continue: false, option: 'normal', return: false },
     9: { text: 'お問い合わせ内容を入力して送信ボタンを押してください。(専門家が内容を判断できるように詳細にご入力お願い致します。)', continue: false, option: 'normal', return: false },
     10: { text: { title: '相談を送信しますか？', choices: ['はい', '入力しなおす'] }, continue: false, option: 'choices', return: false },
-    11: { text: 'ご利用ありがとうございました。対応出来る専門家が見つかった場合、3営業日以内にご連絡させていただきます。', continue: false, option: 'normal', return: true },
+    11: { text: 'ご利用ありがとうございました。<br>対応出来る専門家が見つかった場合、3営業日以内にご連絡させていただきます。<br>お急ぎの場合は直接、専門家へのご連絡お願い致します。', continue: false, option: 'normal', return: true },
     12: { text: 'もう一度相談内容を入力してください。', continue: false, option: 'normal', return: false },
 };
 

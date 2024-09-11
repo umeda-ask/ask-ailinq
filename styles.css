@@ -106,7 +106,7 @@
     word-wrap: break-word;
     color: #000000; /* 吹き出しの文字色を黒に設定 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
-    font-size: 1.4vw; !important
+    font-size: 1.2vw; !important
 }
 
 .chatbot-left {
