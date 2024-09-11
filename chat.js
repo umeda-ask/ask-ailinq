@@ -440,13 +440,13 @@ function robotOutput() {
         } else {
             switch (currentChat.option) {
                 case 'normal':
-                    div.textContent = currentChat.text;
+                    div.innerHTML = currentChat.text;
                     break;
                 case 'random':
-                    div.textContent = currentChat.text[Math.floor(Math.random() * currentChat.text.length)];
+                    div.innerHTML = currentChat.text[Math.floor(Math.random() * currentChat.text.length)];
                     break;
                 default:
-                    div.textContent = '内容が見つかりませんでした。';
+                    div.innerHTML = '内容が見つかりませんでした。';
                     console.error('Unknown option for robotCount:', robotCount);
             }
             sendMessageButton.disabled = false;
