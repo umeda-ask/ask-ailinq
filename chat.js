@@ -14,7 +14,7 @@ const professionals = [
         phone: "06-6314-6904",
         businessHours: "平日9:00～17:00",
         image: "https://sharing.kigyou-askpro.com/aichat/image/tori.jpg",
-        url: "lawyer_url1",
+        url: "https://www.soudan-form.com/detail/osaka/906463/keisai/",
         latitude: 34.696965,
         longitude: 135.515514,
         type: "弁護士"
@@ -30,7 +30,7 @@ const professionals = [
         phone: "06-6151-5798",
         businessHours: "平日9:00～19:00",
         image: "https://sharing.kigyou-askpro.com/aichat/image/boriba.jpg",
-        url: "lawyer_url2",
+        url: "https://www.soudan-form.com/detail/osaka/904752/",
         latitude: 34.785989,
         longitude: 135.466178,
         type: "弁護士"
@@ -46,7 +46,7 @@ const professionals = [
         phone: "03-6262-9980",
         businessHours: "平日9:00～21:00",
         image: "https://sharing.kigyou-askpro.com/aichat/image/duel1.jpg",
-        url: "lawyer_url2",
+        url: "https://www.soudan-form.com/detail/tokyo/904631/keisai/",
         latitude: 35.695232,
         longitude: 139.767767,
         type: "弁護士"
@@ -62,7 +62,7 @@ const professionals = [
         phone: "03-6262-9980",
         businessHours: "平日9:00～21:00",
         image: "https://sharing.kigyou-askpro.com/aichat/image/duel2.png",
-        url: "lawyer_url2",
+        url: "https://www.soudan-form.com/detail/tokyo/904631/keisai/",
         latitude: 35.695232,
         longitude: 139.767767,
         type: "弁護士"
@@ -78,7 +78,7 @@ const professionals = [
         phone: "078-367-6880",
         businessHours: "平日9:00～17:00",
         image: "https://sharing.kigyou-askpro.com/aichat/image/minatomo.jpg",
-        url: "lawyer_url2",
+        url: "https://www.soudan-form.com/detail/hyogo/900366/",
         latitude: 34.685957,
         longitude: 135.184551,
         type: "弁護士"
@@ -94,7 +94,7 @@ const professionals = [
         phone: "03-6824-5271",
         businessHours: "平日9:00～20:00",
         image: "https://s3-ap-northeast-1.amazonaws.com/navi-admin-prod/system/images/8287/office_info_202310041946_82871_w380.jpg.webp?20240226220819",
-        url: "lawyer_url2",
+        url: "https://www.soudan-form.com/detail/tokyo/910444/",
         latitude: 35.658447,
         longitude: 139.702164,
         type: "弁護士"
@@ -110,7 +110,7 @@ const professionals = [
         phone: "03-6272-3550",
         businessHours: "平日9:00～18:00",
         image: "https://legal-image-distribution.legal.coconala.com/FDv2u8BXgeyh3rCFnmtYbe5s?width=180&height=180&crop=true",
-        url: "lawyer_url2",
+        url: "https://www.soudan-form.com/roudousosyou-support/tokyo/906137/",
         latitude: 35.682377,
         longitude: 139.740253,
         type: "弁護士"
@@ -126,7 +126,7 @@ const professionals = [
         phone: "052-684-8940",
         businessHours: "平日9:00～17:00",
         image: "https://sharing.kigyou-askpro.com/aichat/image/kayagaki.jpg",
-        url: "lawyer_url2",
+        url: "https://www.soudan-form.com/detail/aichi/909041/keisai/",
         latitude: 35.173697,
         longitude: 136.899001,
         type: "弁護士"
@@ -142,7 +142,7 @@ const professionals = [
         phone: "03-5615-2440",
         businessHours: "平日10:00～19:00",
         image: "https://sharing.kigyou-askpro.com/aichat/image/mypartner.jpg",
-        url: "lawyer_url2",
+        url: "https://www.soudan-form.com/souzokusoudan-support/tokyo/900167/",
         latitude: 35.733433,
         longitude: 139.767784,
         type: "弁護士"
@@ -158,7 +158,7 @@ const professionals = [
         phone: "047-498-5880",
         businessHours: "平日9:00～18:00",
         image: "https://sharing.kigyou-askpro.com/aichat/image/kamagayasogo.jpg",
-        url: "lawyer_url2",
+        url: "https://www.soudan-form.com/detail/chiba/910540/",
         latitude: 35.781767,
         longitude: 140.002604,
         type: "弁護士"
@@ -174,7 +174,7 @@ const professionals = [
         phone: "03-6273-1757",
         businessHours: "平日9:00～18:00",
         image: "https://sharing.kigyou-askpro.com/aichat/image/futaba.jpg",
-        url: "lawyer_url2",
+        url: "https://www.soudan-form.com/fudosan-touki/tokyo/900270/",
         latitude: 35.753050,
         longitude: 139.805225,
         type: "弁護士"
@@ -190,7 +190,7 @@ const professionals = [
         phone: "03-5801-0815",
         businessHours: "09:00 - 18:00",
         image: "https://sharing.kigyou-askpro.com/aichat/image/ashihara.jpg",
-        url: "taxaccountant_url1",
+        url: "https://www.soudan-form.com/detail/tokyo/901493/",
         latitude: 35.711409,
         longitude: 139.74438,
         type: "税理士"
@@ -206,7 +206,7 @@ const professionals = [
         phone: "046-226-9980",
         businessHours: "9:00 - 17:00",
         image: "https://sharing.kigyou-askpro.com/aichat/image/sunpartner.jpg",
-        url: "taxaccountant_url2",
+        url: "https://www.soudan-form.com/detail/kanagawa/902386/",
         latitude: 35.43711,
         longitude: 139.363768,
         type: "税理士"
@@ -288,9 +288,9 @@ const chatList = {
     6: { text: 'お名前をフルネームで入力して送信ボタンを押してください', continue: false, option: 'normal', return: false },
     7: { text: 'ご自宅の住所を入力して送信ボタンを押してください。(例:東京都千代田区丸の内)', continue: false, option: 'normal', return: false },
     8: { text: '専門家のご連絡を受け取れるお電話番号を入力して送信ボタンを押してください。(例:0901111XXXX)', continue: false, option: 'normal', return: false },
-    9: { text: 'お問い合わせ内容を入力して送信ボタンを押してください。(専門家が内容を判断できるように詳細にご入力お願い致します。)', continue: false, option: 'normal', return: false },
+    9: { text: 'お問い合わせ内容を入力して送信ボタンを押してください。(詳細にご入力いただくことで専門家が見つかる可能性が高まります。)', continue: false, option: 'normal', return: false },
     10: { text: { title: '相談を送信しますか？', choices: ['はい', '入力しなおす'] }, continue: false, option: 'choices', return: false },
-    11: { text: 'ご利用ありがとうございました。\n対応出来る専門家が見つかった場合、3営業日以内に専門家からのご連絡がございます。\nお急ぎの場合は直接、専門家へのご連絡お願い致します。', continue: false, option: 'normal', return: true },
+    11: { text: 'ご利用ありがとうございました。\n対応出来る専門家が見つかった場合、3営業日以内に専門家からのご連絡がございます。\nお急ぎの場合は直接、専門家へのご連絡お願い致します。\r\nまた、ご入力いただいた情報につきましては弊社では保持しておりません。', continue: false, option: 'normal', return: true },
     12: { text: 'もう一度相談内容を入力してください。', continue: false, option: 'normal', return: false },
 };
 
