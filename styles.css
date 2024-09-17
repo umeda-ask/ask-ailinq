@@ -337,6 +337,12 @@
     #chatbotHeader span {
         font-size: 6vw;
     }
+    
+    #personIcon {
+        width: 8vw; /* アイコンの大きさを調整 */
+        height: 8vw; /* アイコンの大きさを調整 */
+    }
+    
 }
 .choice-button {
     font-size: 1.2vw; /* ボタンの文字を少し大きく */
