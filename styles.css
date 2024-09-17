@@ -112,6 +112,7 @@
 .chatbot-left {
     background: #ffffff; /* 左側の吹き出しの背景を白に設定 */
     border: 1px solid #ccc;
+    white-space: break-spaces;
 }
 
 .chatbot-left::before {
@@ -127,6 +128,7 @@
 
 .chatbot-right {
     background: #ffffff; /* 右側の吹き出しの背景も白に設定 */
+    white-space: break-spaces;
 }
 
 .chatbot-right::before {

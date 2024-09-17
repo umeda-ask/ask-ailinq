@@ -288,9 +288,9 @@ const chatList = {
     6: { text: 'お名前をフルネームで入力して送信ボタンを押してください', continue: false, option: 'normal', return: false },
     7: { text: 'ご自宅の住所を入力して送信ボタンを押してください。(例:東京都千代田区丸の内)', continue: false, option: 'normal', return: false },
     8: { text: '専門家のご連絡を受け取れるお電話番号を入力して送信ボタンを押してください。(例:0901111XXXX)', continue: false, option: 'normal', return: false },
-    9: { text: 'お問い合わせ内容を入力して送信ボタンを押してください。(詳細にご入力いただくことで専門家が見つかる可能性が高まります。)', continue: false, option: 'normal', return: false },
+    9: { text: 'お問い合わせ内容を入力して送信ボタンを押してください。(①問題が発生した日時や場所、\r\n②関係者、\r\n③これまでに行った対応、\r\n④望む解決方法をご入力ください)', continue: false, option: 'normal', return: false },
     10: { text: { title: '相談を送信しますか？', choices: ['はい', '入力しなおす'] }, continue: false, option: 'choices', return: false },
-    11: { text: 'ご利用ありがとうございました。\n対応出来る専門家が見つかった場合、3営業日以内に専門家からのご連絡がございます。\nお急ぎの場合は直接、専門家へのご連絡お願い致します。\r\nまた、ご入力いただいた情報につきましては弊社では保持しておりません。', continue: false, option: 'normal', return: true },
+    11: { text: 'ご利用ありがとうございました。\nご入力いただいた情報を元に対応出来る専門家をお探しします。見つかった場合は3営業日以内に専門家からのご連絡がございます。\nお急ぎの場合は直接、専門家へのご連絡お願い致します。\r\nまた、ご入力いただいた情報につきましては弊社では保持しておりません。', continue: false, option: 'normal', return: true },
     12: { text: 'もう一度相談内容を入力してください。', continue: false, option: 'normal', return: false },
 };
 
@@ -298,16 +298,23 @@ const chatList = {
     const closeChatbotButton = document.getElementById('closeChatbot');
     const sendMessageButton = document.getElementById('sendMessage');
 
-    openChatbotButton.onclick = function() {
-        const chatbot = document.getElementById('chatbot');
-        chatbot.style.display = 'flex';
-        setTimeout(() => {
-            chatbot.classList.add('show');
-        }, 10);
-        setTimeout(() => {
-            openChatbotButton.classList.add('hide');
-        }, 200);
-    };
+openChatbotButton.onclick = function() {
+    const chatbot = document.getElementById('chatbot');
+    chatbot.style.display = 'flex';
+    setTimeout(() => {
+        chatbot.classList.add('show');
+    }, 10);
+    setTimeout(() => {
+        openChatbotButton.classList.add('hide');
+    }, 200);
+
+    // チャットを開いたときにアラートを表示する
+    alert('正確に専門家をお探しするために、位置情報を許可してください。');
+
+    // 位置情報の取得を開始
+    getUserLocationAndSetCookie();
+};
+
 
     closeChatbotButton.onclick = function() {
         const chatbot = document.getElementById('chatbot');
@@ -730,7 +737,7 @@ function sendEmailToProfessionals() {
     // top5Professionalsが0件だった場合
     if (top5Professionals.length === 0) {
         // contact@askpro.co.jpにメールを送信
-        emailjs.send("askchatmail", "template_k796y0o", {
+        emailjs.send("askchatmail", "template_ufwmbjq", {
             user_name: userName,
             user_address: userAddress,
             user_phone: userPhone,
@@ -775,7 +782,7 @@ function sendEmailToProfessionals() {
         });
 
         // ここで1秒間の同期スリープを挿入
-        sleepSync(1000);  // 1000ms = 1秒
+        sleepSync(2000);  // 1000ms = 1秒
     }
 
 }
@@ -828,8 +835,8 @@ function getUserLocationAndSetCookie() {
 
 function useDefaultLocationAndSetCookie() {
     const defaultLocation = {
-        latitude: 35.6895, // 東京のデフォルト位置
-        longitude: 139.6917
+        latitude: 0, // デフォルト位置
+        longitude: 0
     };
     console.log('Using default location:', defaultLocation);
     setLocationCookie(defaultLocation);
