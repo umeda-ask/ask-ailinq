@@ -312,7 +312,7 @@ openChatbotButton.onclick = function() {
     const latitude = getCookieValue('user_latitude');
     const longitude = getCookieValue('user_longitude');
     
-    if (!latitude || !longitude) {
+    if (latitude == 0 && longitude == 0) {
         // 位置情報が取得されていない場合のみアラートを表示
         alert('正確に専門家をお探しするために、位置情報を許可してください。');
     }
