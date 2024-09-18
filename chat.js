@@ -308,12 +308,19 @@ openChatbotButton.onclick = function() {
         openChatbotButton.classList.add('hide');
     }, 200);
 
-    // チャットを開いたときにアラートを表示する
-    alert('正確に専門家をお探しするために、位置情報を許可してください。');
+    // クッキーから位置情報を取得
+    const latitude = getCookieValue('user_latitude');
+    const longitude = getCookieValue('user_longitude');
+    
+    if (!latitude || !longitude) {
+        // 位置情報が取得されていない場合のみアラートを表示
+        alert('正確に専門家をお探しするために、位置情報を許可してください。');
+    }
 
     // 位置情報の取得を開始
     getUserLocationAndSetCookie();
 };
+
 
 
     closeChatbotButton.onclick = function() {
