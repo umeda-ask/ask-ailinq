@@ -288,9 +288,9 @@ const chatList = {
     6: { text: 'お名前をフルネームで入力して送信ボタンを押してください', continue: false, option: 'normal', return: false },
     7: { text: 'ご自宅の住所を入力して送信ボタンを押してください。(例:東京都千代田区丸の内)', continue: false, option: 'normal', return: false },
     8: { text: '専門家のご連絡を受け取れるお電話番号を入力して送信ボタンを押してください。(例:0901111XXXX)', continue: false, option: 'normal', return: false },
-    9: { text: 'お問い合わせ内容を入力して送信ボタンを押してください。※当システムではAIによるフィルタリングを実施いるため出来る限り、詳細な状況をご入力ください。', continue: false, option: 'normal', return: false },
+    9: { text: 'お問い合わせ内容を入力して送信ボタンを押してください。※対応方法を判別するため出来る限り、詳細な状況をご入力ください。', continue: false, option: 'normal', return: false },
     10: { text: { title: '相談を送信しますか？', choices: ['はい', '入力しなおす'] }, continue: false, option: 'choices', return: false },
-    11: { text: 'ご利用ありがとうございました。\nご入力いただいた情報を元に対応出来る専門家をお探しします。見つかった場合は3営業日以内に専門家からのご連絡がございます。\nお急ぎの場合は直接、専門家へのご連絡お願い致します。\r\nまた、ご入力いただいた情報につきましては弊社では保持しておりません。', continue: false, option: 'normal', return: true },
+    11: { text: 'ご利用ありがとうございました。\nご入力いただいた情報につきましては弊社では保持しておりません。\nご入力いただいた情報を元に対応出来る専門家をお探しします。相談内容によっては専門家が見つからない場合がございます。見つかった場合は3営業日以内に専門家からのご連絡がございます。\nお急ぎの場合は直接、専門家へのご連絡お願い致します。', continue: false, option: 'normal', return: true },
     12: { text: 'もう一度相談内容を入力してください。', continue: false, option: 'normal', return: false },
 };
 
