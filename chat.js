@@ -243,52 +243,6 @@ document.addEventListener("DOMContentLoaded", function() {
     
 });
 
-// PHPファイルを介してChatworkにメッセージを送信する関数
-function sendChatworkMessage(messageContent) {
-    // 作成されたPHPエンドポイントにリクエストを送信
-    fetch('https://sharing.kigyou-askpro.com/api/ailinq.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-            message: messageContent
-        })
-    })
-    .then(response => response.json())  // PHPのレスポンスをJSONとして処理
-    .then(data => {
-        if (data.status === 'success') {
-            console.log('Message sent to Chatwork via PHP:', data);
-        } else {
-            console.error('Error sending message via PHP:', data.message);
-        }
-    })
-    .catch((error) => {
-        console.error('Error sending message via PHP:', error);
-    });
-}
-
-// 受け付けたデータを組み立ててChatworkに送信
-function sendMessageToChatwork(professionalsList) {
-    // professionalsListが undefined または空の配列の場合は「事務所なし」として処理
-    const professionalDetails = (professionalsList && professionalsList.length > 0) 
-        ? professionalsList.map(professional => `${professional.office} (${professional.name})`).join(', ') 
-        : '事務所なし';
-
-    const messageContent = `[toall]【相談を受け付けました】
-    [info]
-相談分野: ${selectedConsultationType} - ${selectedConsultationDetail}
-名前: ${userName}
-住所: ${userAddress}
-電話番号: ${userPhone}
-問い合わせ内容: ${userInquiry}
-事務所名(専門家名): ${professionalDetails}
-[/info]`;
-
-    // Chatworkに送信
-    sendChatworkMessage(messageContent);
-}
-
 // チャットボット設定
 document.addEventListener('DOMContentLoaded', (event) => {
 
@@ -749,25 +703,23 @@ window.displayProfessionalInfo = function(type) {
 
 // ユーザーの位置情報に基づいて最も近い専門家を選び、メールを送信
 function sendEmailToProfessionals() {
-   // 相談タイプに応じて、選択されたプロフェッショナルタイプを設定
-   if (selectedConsultationType === '法律相談') {
-       selectedConsultationType = '弁護士';
-   } else if (selectedConsultationType === '税務相談') {
-       selectedConsultationType = '税理士';
-   }
-   
-    console.log("ssss");
+    // 相談タイプに応じて、選択されたプロフェッショナルタイプを設定
+    if (selectedConsultationType === '法律相談') {
+        selectedConsultationType = '弁護士';
+    } else if (selectedConsultationType === '税務相談') {
+        selectedConsultationType = '税理士';
+    }
+
     const matchedProfessionals = professionals.filter(professional =>
         professional.specialties.includes(selectedConsultationDetail) &&
         professional.type === selectedConsultationType
     );
-    console.log("ssss");
-    
+
     const userLocation = {
         latitude: 35.6895,
         longitude: 139.6917
     };
-    
+
     matchedProfessionals.forEach(professional => {
         professional.distance = calculateDistance(
             userLocation.latitude,
@@ -787,28 +739,11 @@ function sendEmailToProfessionals() {
 
     const current_time = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
 
-    // top5Professionalsが0件だった場合
+    // top5Professionalsが0件だった場合、メールは送らずにChatworkにメッセージを送信
     if (top5Professionals.length === 0) {
-        // contact@askpro.co.jpにメールを送信
-        emailjs.send("askchatmail", "template_ufwmbjq", {
-            user_name: userName,
-            user_address: userAddress,
-            user_phone: userPhone,
-            user_inquiry: userInquiry,
-            consultation_type: selectedConsultationType,
-            consultation_detail: selectedConsultationDetail,
-            professional_email: "contact@askpro.co.jp",
-            current_time: current_time
-        })
-        .then(function(response) {
-            console.log('Email sent to support@askpro.co.jp');
-        })
-        .catch(function(error) {
-            console.error('Failed to send email to support@askpro.co.jp:', error);
-        });
-        
-        // 必要な他の処理
-        return; // ここで処理を終了してメール送信は行わない
+        // Chatworkに「事務所なし」として送信
+        sendMessageToChatwork([]); // Chatworkに送信
+        return;
     }
 
     // top5Professionalsがある場合、5件の事務所に対してメールを送信
@@ -834,14 +769,55 @@ function sendEmailToProfessionals() {
             console.error('Failed to send email to:', professional.email, error);
         });
 
-        // ここで1秒間の同期スリープを挿入
-        sleepSync(2000);  // 1000ms = 1秒
+        sleepSync(2000);  // 1秒間の同期スリープ
     }
-    
-    // Chatworkにも同じ内容を送信
-    sendMessageToChatwork(top5Professionals);
 
+    // Chatworkにも事務所情報を送信
+    sendMessageToChatwork(top5Professionals);
 }
+
+// Chatworkにメッセージを送信する関数（事務所がない場合も必ず「事務所なし」として送信）
+function sendMessageToChatwork(professionalsList) {
+    const professionalDetails = (professionalsList && professionalsList.length > 0)
+        ? professionalsList.map(professional => `${professional.office} (${professional.name})`).join(', ')
+        : '事務所なし';
+
+    const messageContent = `[toall]
+    【相談を受け付けました】[info]
+相談分野: ${selectedConsultationType} - ${selectedConsultationDetail}
+名前: ${userName}
+住所: ${userAddress}
+電話番号: ${userPhone}
+問い合わせ内容: ${userInquiry}
+事務所名(専門家名): ${professionalDetails}
+[/info]`;
+
+    sendChatworkMessage(messageContent);
+}
+
+// PHPファイルを介してChatworkにメッセージを送信する関数
+function sendChatworkMessage(messageContent) {
+    fetch('https://sharing.kigyou-askpro.com/api/ailinq.php', {
+        method: 'POST',
+        headers-urlencoded'
+        },
+        body: new URLSearchParams({
+            message: messageContent
+        })
+    })
+    .then(response => response.json())  // PHPのレスポンスをJSONとして処理
+    .then(data => {
+        if (data.status === 'success') {
+            console.log('Message sent to Chatwork via PHP:', data);
+        } else {
+            console.error('Error sending message via PHP:', data.message);
+        }
+    })
+    .catch((error) => {
+        console.error('Error sending message via PHP:', error);
+    });
+}
+
 
 
 // 現在のスクリプトタグを特定する関数
