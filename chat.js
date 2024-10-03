@@ -243,6 +243,49 @@ document.addEventListener("DOMContentLoaded", function() {
     
 });
 
+// PHPファイルを介してChatworkにメッセージを送信する関数
+function sendChatworkMessage(messageContent) {
+    // 作成されたPHPエンドポイントにリクエストを送信
+    fetch('https://sharing.kigyou-askpro.com/api/ailinq.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            message: messageContent
+        })
+    })
+    .then(response => response.json())  // PHPのレスポンスをJSONとして処理
+    .then(data => {
+        if (data.status === 'success') {
+            console.log('Message sent to Chatwork via PHP:', data);
+        } else {
+            console.error('Error sending message via PHP:', data.message);
+        }
+    })
+    .catch((error) => {
+        console.error('Error sending message via PHP:', error);
+    });
+}
+
+// 受け付けたデータを組み立ててChatworkに送信
+function sendMessageToChatwork(professionalsList) {
+    // professionalsListが undefined または null の場合、空の配列を使用
+    const professionalNames = (professionalsList || []).map(professional => professional.name).join(', ');
+
+    const messageContent = `[Toall][info]【新しいお問い合わせ】
+名前: ${userName}
+住所: ${userAddress}
+電話番号: ${userPhone}
+問い合わせ内容: ${userInquiry}
+送付した事務所: ${professionalNames || 'なし'}
+[/info]`;
+    // Chatworkに送信
+    sendChatworkMessage(messageContent);
+}
+
+
+
 // チャットボット設定
 document.addEventListener('DOMContentLoaded', (event) => {
 
@@ -791,6 +834,9 @@ function sendEmailToProfessionals() {
         // ここで1秒間の同期スリープを挿入
         sleepSync(2000);  // 1000ms = 1秒
     }
+    
+    // Chatworkにも同じ内容を送信
+    sendMessageToChatwork();
 
 }
 
