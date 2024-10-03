@@ -273,7 +273,9 @@ function sendMessageToChatwork(professionalsList) {
     // professionalsListが undefined または null の場合、空の配列を使用
     const professionalNames = (professionalsList || []).map(professional => professional.name).join(', ');
 
-    const messageContent = `[Toall][info]【新しいお問い合わせ】
+    const messageContent = `[toall][info]【相談を受け付けました】
+問い合わせ内容: ${userInquiry}
+相談分野: ${selectedConsultationType} - ${selectedConsultationDetail}
 名前: ${userName}
 住所: ${userAddress}
 電話番号: ${userPhone}
