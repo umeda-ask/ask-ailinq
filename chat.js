@@ -800,7 +800,8 @@ const messageContent = `[toall]
 function sendChatworkMessage(messageContent) {
     fetch('https://sharing.kigyou-askpro.com/api/ailinq.php', {
         method: 'POST',
-        headers-urlencoded'
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: new URLSearchParams({
             message: messageContent
@@ -818,7 +819,6 @@ function sendChatworkMessage(messageContent) {
         console.error('Error sending message via PHP:', error);
     });
 }
-
 
 
 // 現在のスクリプトタグを特定する関数
