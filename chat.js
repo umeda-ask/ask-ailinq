@@ -271,7 +271,9 @@ function sendChatworkMessage(messageContent) {
 // 受け付けたデータを組み立ててChatworkに送信
 function sendMessageToChatwork(professionalsList) {
     // professionalsListが undefined または null の場合、空の配列を使用
-    const professionalNames = (professionalsList || []).map(professional => professional.name).join(', ');
+    const professionalDetails = (professionalsList || []).map(professional => {
+        return `${professional.office} (${professional.name})`;
+    }).join(', ');
 
     const messageContent = `[toall]【相談を受け付けました】
     [info]
@@ -280,13 +282,11 @@ function sendMessageToChatwork(professionalsList) {
 住所: ${userAddress}
 電話番号: ${userPhone}
 問い合わせ内容: ${userInquiry}
-送付した事務所: ${professionalNames || 'なし'}
+送付した事務所(専門家名): ${professionalDetails || 'なし'}
 [/info]`;
     // Chatworkに送信
     sendChatworkMessage(messageContent);
 }
-
-
 
 // チャットボット設定
 document.addEventListener('DOMContentLoaded', (event) => {
