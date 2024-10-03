@@ -282,7 +282,7 @@ function sendMessageToChatwork(professionalsList) {
 住所: ${userAddress}
 電話番号: ${userPhone}
 問い合わせ内容: ${userInquiry}
-送付した事務所(専門家名): ${professionalDetails || 'なし'}
+送付した事務所: ${professionalDetails || 'なし'}
 [/info]`;
     // Chatworkに送信
     sendChatworkMessage(messageContent);
