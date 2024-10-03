@@ -275,8 +275,8 @@ function sendMessageToChatwork(professionalsList) {
         return `${professional.office} (${professional.name})`;
     }).join(', ');
 
-    const messageContent = `[toall]【相談を受け付けました】
-    [info]
+    const messageContent = `[toall]
+    【相談を受け付けました】[info]
 相談分野: ${selectedConsultationType} - ${selectedConsultationDetail}
 名前: ${userName}
 住所: ${userAddress}
