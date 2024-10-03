@@ -782,15 +782,16 @@ function sendMessageToChatwork(professionalsList) {
         ? professionalsList.map(professional => `${professional.office} (${professional.name})`).join(', ')
         : '事務所なし';
 
-    const messageContent = `[toall]
+const messageContent = `[toall]
     【相談を受け付けました】[info]
-相談分野: ${selectedConsultationType} - ${selectedConsultationDetail}
-名前: ${userName}
-住所: ${userAddress}
-電話番号: ${userPhone}
-問い合わせ内容: ${userInquiry}
-事務所名(専門家名): ${professionalDetails}
+相談分野: ${selectedConsultationType || '不明'} - ${selectedConsultationDetail || '不明'}
+名前: ${userName || '不明'}
+住所: ${userAddress || '不明'}
+電話番号: ${userPhone || '不明'}
+問い合わせ内容: ${userInquiry || '不明'}
+事務所名(専門家名): ${professionalDetails || '事務所なし'}
 [/info]`;
+
 
     sendChatworkMessage(messageContent);
 }
