@@ -270,20 +270,21 @@ function sendChatworkMessage(messageContent) {
 
 // 受け付けたデータを組み立ててChatworkに送信
 function sendMessageToChatwork(professionalsList) {
-    // professionalsListが undefined または null の場合、空の配列を使用
-    const professionalDetails = (professionalsList || []).map(professional => {
-        return `${professional.office} (${professional.name})`;
-    }).join(', ');
+    // professionalsListが undefined または空の配列の場合は「事務所なし」として処理
+    const professionalDetails = (professionalsList && professionalsList.length > 0) 
+        ? professionalsList.map(professional => `${professional.office} (${professional.name})`).join(', ') 
+        : '事務所なし';
 
-    const messageContent = `[toall]
-    【相談を受け付けました】[info]
+    const messageContent = `[toall]【相談を受け付けました】
+    [info]
 相談分野: ${selectedConsultationType} - ${selectedConsultationDetail}
 名前: ${userName}
 住所: ${userAddress}
 電話番号: ${userPhone}
 問い合わせ内容: ${userInquiry}
-送付した事務所: ${professionalDetails || 'なし'}
+事務所名(専門家名): ${professionalDetails}
 [/info]`;
+
     // Chatworkに送信
     sendChatworkMessage(messageContent);
 }
