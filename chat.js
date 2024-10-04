@@ -609,7 +609,7 @@ window.displayProfessionalInfo = function(type) {
     );
 
     if (selectedProfessionals.length === 0) {
-        let noResultHTML = `<div class="not-found-left"><span>申し訳ありません。お近くに対応できる専門家が見つかりませんでした。</span><br><span>適切な専門家をお探しするにはこちらの番号にお電話ください: <br><a href="tel:050-5578-9800" style="color: #0000EE; font-weight: bold; text-decoration: underline;">050-5578-9800</a></span></div>`;
+        let noResultHTML = `<div class="not-found-left">申し訳ありません。お近くに対応できる専門家が見つかりませんでした。<br>適切な専門家をお探しするにはこちらの番号にお電話ください: <br><a href="tel:050-5578-9800" style="color: #0000EE; font-weight: bold; text-decoration: underline;">050-5578-9800</a></div>`;
 
         const div = document.createElement('div');
         div.classList.add('chatbot-left');
