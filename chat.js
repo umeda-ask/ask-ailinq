@@ -705,6 +705,17 @@ function sendEmailToProfessionals() {
         selectedConsultationType = '税理士';
     }
 
+    // 位置情報がクッキーから取得できない場合は、デフォルトの位置情報を使用
+    let userLocation = getUserLocationFromCookie();
+    if (!userLocation || !userLocation.latitude || !userLocation.longitude) {
+        console.log("位置情報が取得できませんでした。デフォルトの位置情報を使用します。");
+        useDefaultLocationAndSetCookie();
+        userLocation = {
+            latitude: 0,
+            longitude: 0
+        };
+    }
+
     const matchedProfessionals = professionals.filter(professional =>
         professional.specialties.includes(selectedConsultationDetail) &&
         professional.type === selectedConsultationType
