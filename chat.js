@@ -783,6 +783,7 @@ function sendMessageToChatwork(professionalsList) {
 
 const messageContent = `[toall]
     【相談を受け付けました】[info]
+相談日時: ${currentTime}
 相談分野: ${selectedConsultationType || '不明'} - ${selectedConsultationDetail || '不明'}
 名前: ${userName || '不明'}
 住所: ${userAddress || '不明'}
