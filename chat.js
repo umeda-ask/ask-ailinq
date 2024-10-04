@@ -561,6 +561,10 @@ window.pushChoice = function(e) {
     robotCount = nextRobotCount;
     robotOutput();
 }
+    getUserLocationAndSetCookie();
+    
+    getUserLocationFromCookie();
+
 
 // 専門家を検索中のメッセージを表示する関数
 window.showSearchingMessage = function() {
