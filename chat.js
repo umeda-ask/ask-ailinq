@@ -789,7 +789,7 @@ const messageContent = `[toall]
 住所: ${userAddress || '不明'}
 電話番号: ${userPhone || '不明'}
 問い合わせ内容: ${userInquiry || '不明'}
-事務所名(専門家名): ${professionalDetails || '事務所なし'}
+送付事務所名(専門家名): ${professionalDetails || '事務所なし'}
 [/info]`;
 
 
