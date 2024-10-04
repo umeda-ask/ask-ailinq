@@ -561,7 +561,11 @@ window.pushChoice = function(e) {
     robotCount = nextRobotCount;
     robotOutput();
 }
-    getUserLocationAndSetCookie();
+
+    const userLocation = {
+        latitude: 35.6895,
+        longitude: 139.6917
+    };
     
     getUserLocationFromCookie();
 
@@ -605,13 +609,7 @@ window.displayProfessionalInfo = function(type) {
     );
 
     if (selectedProfessionals.length === 0) {
-        let noResultHTML = `
-            <div class="">
-                <span>申し訳ありません。お近くに対応できる専門家が見つかりませんでした。</span>
-                <br>
-                <span>適切な専門家をお探しするにはこちらの番号にお電話ください: <br><a href="tel:050-5578-9800" style="color: #0000EE; font-weight: bold; text-decoration: underline;">050-5578-9800</a></span>
-            </div>
-        `;
+        let noResultHTML = `<div class="not-found-left"><span>申し訳ありません。お近くに対応できる専門家が見つかりませんでした。</span><br><span>適切な専門家をお探しするにはこちらの番号にお電話ください: <br><a href="tel:050-5578-9800" style="color: #0000EE; font-weight: bold; text-decoration: underline;">050-5578-9800</a></span></div>`;
 
         const div = document.createElement('div');
         div.classList.add('chatbot-left');

@@ -1092,3 +1092,8 @@ textarea {
     white-space: pre-wrap; /* 改行を保持しつつ折り返し */
     overflow-wrap: break-word; /* 長い単語が折り返される */
 }
+
+.not-found-left {
+    margin-bottom: 3%;
+    display: flex;
+}
