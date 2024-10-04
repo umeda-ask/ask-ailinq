@@ -562,15 +562,6 @@ window.pushChoice = function(e) {
     robotOutput();
 }
 
-
-    const userLocation = {
-        latitude: 0,
-        longitude: 0
-    };
-    
-    getUserLocationFromCookie();
-
-
 // 専門家を検索中のメッセージを表示する関数
 window.showSearchingMessage = function() {
     const ul = document.getElementById('chatbot-ul');
@@ -714,11 +705,6 @@ function sendEmailToProfessionals() {
         professional.specialties.includes(selectedConsultationDetail) &&
         professional.type === selectedConsultationType
     );
-
-    const userLocation = {
-        latitude: 35.6895,
-        longitude: 139.6917
-    };
 
     matchedProfessionals.forEach(professional => {
         professional.distance = calculateDistance(
