@@ -224,6 +224,7 @@ let userPhone = '';
 let userInquiry = '';
 let selectedConsultationType = '';  // 法律相談または税務相談の種類を保存
 let selectedConsultationDetail = '';  // 法律相談または税務相談の詳細を保存
+let current_time = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });  // 法律相談または税務相談の詳細を保存
 
 document.addEventListener("DOMContentLoaded", function() {
 
