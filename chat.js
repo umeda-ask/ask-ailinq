@@ -564,8 +564,8 @@ window.pushChoice = function(e) {
 
 
     const userLocation = {
-        latitude: 35.6895,
-        longitude: 139.6917
+        latitude: 0,
+        longitude: 0
     };
     
     getUserLocationFromCookie();
