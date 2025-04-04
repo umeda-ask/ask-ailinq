@@ -5,7 +5,7 @@
 // 専門家リストをJSONから読み込む
 let professionals = [];
 
-fetch('./professionals.json')
+fetch('https://umeda-ask.github.io/ask-ailinq/professionals.json')
     .then(response => response.json())
     .then(data => {
         professionals = data;
