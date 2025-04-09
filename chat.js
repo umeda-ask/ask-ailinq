@@ -87,9 +87,9 @@ const chatList = {
     1: { text: 'アスクプロ相談サポート お問い合わせチャットへようこそ。', continue: true, option: 'normal', return: false },
     2: { text: { title: '以下よりお問い合わせ内容を選んでください。', choices: ['相談受付', '専門家を探す'] }, continue: false, option: 'choices', return: true },
     3: { text: { title: 'お問い合わせ内容を選択してください。\nまた、位置情報を許可することでお近くの専門家をご案内することが可能です。', choices: ['法律相談', '税務相談'] }, continue: false, option: 'choices', return: true },
-    4: { text: 'お問い合わせ内容を入力して送信ボタンを押してください。※対応方法を判別するため出来る限り詳細な数値、ご状況をご入力ください。', continue: false, option: 'normal', return: false },
-    5: { text: { title: '法律相談内容を選択してください。', choices: ['離婚・男女問題', '借金', '相続', '交通事故', 'インターネット', '消費者被害', '犯罪・刑事事件', '労働', '債権回収', '不動産・建築', '国際・外国人問題', '医療', '企業法務'] }, continue: false, option: 'choices', return: false },
-    6: { text: { title: '税務相談内容を選択してください。', choices: ['顧問税理士', '経理・決算', '税務調査', '資金調達', '節税', '会社設立', '確定申告', '相続税', '税金・お金'] }, continue: false, option: 'choices', return: false },
+    4: { text: { title: '法律相談内容を選択してください。', choices: ['離婚・男女問題', '借金', '相続', '交通事故', 'インターネット', '消費者被害', '犯罪・刑事事件', '労働', '債権回収', '不動産・建築', '国際・外国人問題', '医療', '企業法務'] }, continue: false, option: 'choices', return: false },
+    5: { text: { title: '税務相談内容を選択してください。', choices: ['顧問税理士', '経理・決算', '税務調査', '資金調達', '節税', '会社設立', '確定申告', '相続税', '税金・お金'] }, continue: false, option: 'choices', return: false },
+    6: { text: 'お問い合わせ内容を入力して送信ボタンを押してください。※対応方法を判別するため出来る限り詳細な数値、ご状況をご入力ください。', continue: false, option: 'normal', return: false },
     7: { text: 'お名前をフルネームで入力して送信ボタンを押してください', continue: false, option: 'normal', return: false },
     8: { text: 'ご自宅の住所を入力して送信ボタンを押してください。(例:東京都千代田区丸の内)', continue: false, option: 'normal', return: false },
     9: { text: '専門家のご連絡を受け取れるお電話番号を入力して送信ボタンを押してください。(例:0901111XXXX)', continue: false, option: 'normal', return: false },
@@ -151,7 +151,7 @@ sendMessageButton.onclick = function() {
         userCount++;
         userData.push(message);
 
-        if (robotCount === 4) {
+        if (robotCount === 6) {
             userInquiry = message;
         } else if (robotCount === 7) {
             userName = message;
@@ -397,6 +397,10 @@ window.showSearchingMessage = function() {
 
 
 window.displayProfessionalInfo = function(type) {
+
+    // クッキーから現在地を取得
+    const userLocation = getUserLocationFromCookie();
+
     // ユーザーが選択した相談内容を取得（例としてここで定義します。実際には適切なロジックで設定してください）
     const selectedSpecialty = userData[userData.length - 1]; // 最新の選択を利用
 
@@ -409,7 +413,7 @@ window.displayProfessionalInfo = function(type) {
     const selectedProfessionals = professionals.filter(professional => 
         professional.type === type &&
         professional.specialties.includes(selectedSpecialty) &&
-        calculateDistance(userLocation.latitude, userLocation.longitude, professional.latitude, professional.longitude) <= 5000
+        calculateDistance(userLocation.latitude, userLocation.longitude, professional.latitude, professional.longitude) <= 50
     );
 
     if (selectedProfessionals.length === 0) {
