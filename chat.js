@@ -375,17 +375,22 @@ window.pushChoice = function(e) {
 
 
 // 専門家を検索中のメッセージを表示する関数
-window.showSearchingMessage = function() {
+window.showSearchingMessage = async function() {
     const ul = document.getElementById('chatbot-ul');
     const li = document.createElement('li');
     li.classList.add('left');
     const div = document.createElement('div');
     div.classList.add('chatbot-left');
 
+    const userLocation = getUserLocationFromCookie();
+
+    const address = await getAddressFromLatLng(userLocation.latitude, userLocation.longitude);
+    const addressText = address ? `${address}周辺で対応出来る専門家を検索中です...` : `対応出来る専門家を検索中です...`;
+
     // くるくるアニメーションを追加
     div.innerHTML = `
         <div id="loading-spinner" class="loading-spinner"></div>
-        <span>対応出来る専門家を検索中です...</span>
+        <span>${addressText}</span>
     `;
 
     li.appendChild(div);
@@ -393,8 +398,6 @@ window.showSearchingMessage = function() {
 
     scrollChatToBottom();
 }
-
-
 
 window.displayProfessionalInfo = function(type) {
 
@@ -751,5 +754,31 @@ function sleepSync(milliseconds) {
     const start = new Date().getTime();
     while (new Date().getTime() - start < milliseconds) {
         // 何もしない（ビジーウェイト）
+    }
+}
+
+//専門家を検索中のメッセージの住所を表示する関数
+async function getAddressFromLatLng(lat, lng) {
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&accept-language=ja`;
+
+    try {
+        const response = await fetch(url, {
+            headers: {
+                'User-Agent': 'ask-ailinq/1.0'
+            }
+        });
+        const data = await response.json();
+        const addr = data.address;
+
+        // 都道府県 + 市区町村 + 町名 の形式で表示
+        const prefecture = addr.state || '';
+        const city = addr.city || addr.county || addr.town || '';
+        const area = addr.suburb || addr.neighbourhood || '';
+
+        const simplifiedAddress = `${prefecture}${city}${area}`;
+        return simplifiedAddress || data.display_name || null;
+    } catch (error) {
+        console.error("住所取得エラー:", error);
+        return null;
     }
 }
